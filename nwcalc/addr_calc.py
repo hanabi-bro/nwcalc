@@ -18,7 +18,10 @@ def ipv4_validate(ipv4):
         (25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$
     ''', re.VERBOSE)
 
-    return ipv4_re.match(ipv4)
+    if ipv4_re.match(ipv4):
+        return True
+    else:
+        return False
 
 def ipv4_size_check(ipv4_long):
     if type(ipv4_long) is not int:
@@ -41,7 +44,7 @@ def ip2long(ipv4):
 
 def long2ip(ipv4_long):
     '''
-    int to ipv4
+        int to ipv4
     '''
 
     if not ipv4_size_check(ipv4_long):
