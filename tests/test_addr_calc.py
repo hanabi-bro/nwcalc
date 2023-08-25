@@ -32,6 +32,7 @@ def test_ipv4_validate(ipv4, expected):
         (32322355201, False),
     ]
 )
+
 def test_ipv4_size_check(ipv4_long, expected):
     assert ipv4_size_check(ipv4_long) == expected
 
@@ -49,8 +50,8 @@ def test_ipv4_size_check(ipv4_long, expected):
     ]
 )
 
-def test_ip2long(ipv4, expected):
-    assert ip2long(ipv4) == expected
+def test_ipv42long(ipv4, expected):
+    assert ipv42long(ipv4) == expected
 
 @pytest.mark.parametrize(
     ('ipv4_long', 'expected'), [
@@ -65,5 +66,6 @@ def test_ip2long(ipv4, expected):
         (32322355201, False),
     ]
 )
-def test_long2ip(ipv4_long, expected):
-    assert long2ip(ipv4_long) == expected
+
+def test_long2ipv4(ipv4_long, expected):
+    assert long2ipv4(ipv4_long) == expected
