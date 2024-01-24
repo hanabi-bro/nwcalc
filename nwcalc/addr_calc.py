@@ -80,24 +80,36 @@ def ipv42long(ipv4):
     # 11000000.10101000.00000001.00001010
     # 3,232,235,786
     #
-    # 10 << (8 * 0) = 10
-    # 1 << (8 * 1) = 256
-    # 168 << (8 * 2) = 11010048
     # 192 << (8 * 3) = 3221225472
+    # 168 << (8 * 2) = 11010048
+    # 1   << (8 * 1) = 256
+    # 10  << (8 * 0) = 10
     # sum 3232235786
     #
     # ポイント
-    # * [::-1]で逆順にして、enumurateのカウントとオクテットを合わせる
+    # * [::-1]で分割したオクテットを逆順にして、enumurateのカウントとオクテットを合わせる
     #   - 最初の: シーケンスの始まり,未指定なので0
-    #   - ２番名の: シーケンスの終わり、未指定なので最終要素
+    #   - 2番名の: シーケンスの終わり、未指定なので最終要素
     #   - -1 ステップ、ひとつづつ減らすので逆順に取得していく
-    # * 例えば、192×(2^(8 * 3)) はbitシフト 192<<24 と同じ
+    # * 192×(2^(8 * 3)) はbitシフト 192<<24 と同じ
     ipv4_long = sum(int(byte) << (8 * i) for i, byte in enumerate(ipv4.split(".")[::-1]))
 
     if not ipv4_size_check(ipv4_long):
         return False
 
     return ipv4_long
+    ## 参考 ChatGPTに聞いてみた(2024/01/24)
+    # def ipv4_to_int(ipv4_address):
+    #     segments = ipv4_address.split('.')
+    #     if len(segments) != 4:
+    #         raise ValueError("Invalid IPv4 address format")
+    # 
+    #     # Convert segments to integers
+    #     segments = [int(segment) for segment in segments]
+    # 
+    #     # Perform the bit shifts and combine the segments
+    #     return (segments[0] << 24) | (segments[1] << 16) | (segments[2] << 8) | segments[3]
+
 
 def long2ipv4(ipv4_long):
     """int to ipv4
